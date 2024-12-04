@@ -1,21 +1,20 @@
 package com.project.diaryai.service;
 
-import com.project.diaryai.client.GptApiClient;
 import com.project.diaryai.client.LoraModelClient;
 import org.springframework.stereotype.Service;
 
 @Service
 public class DiaryService {
-    private final GptApiClient gptApiClient;
+    private final PromptService promptService;
     private final LoraModelClient loraModelClient;
 
-    public DiaryService(GptApiClient gptApiClient, LoraModelClient loraModelClient) {
-        this.gptApiClient = gptApiClient;
+    public DiaryService(PromptService promptService, LoraModelClient loraModelClient) {
+        this.promptService = promptService;
         this.loraModelClient = loraModelClient;
     }
 
     public String generateImage(String diaryContent) {
-        String prompt = gptApiClient.generatePrompt(diaryContent);
+        String prompt = promptService.generatePrompt(diaryContent);
         return loraModelClient.generateImageFromPrompt(prompt);
     }
 }

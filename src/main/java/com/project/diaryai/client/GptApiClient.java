@@ -9,13 +9,12 @@ public class GptApiClient {
     private final WebClient webClient;
 
     public GptApiClient(WebClient.Builder wenClientBuilder) {
-        // FastAPI url 필요
-        this.webClient = wenClientBuilder.baseUrl("FastAPI URL").build();
+        this.webClient = wenClientBuilder.baseUrl("http://localhost:8000/api").build();
     }
 
-    public String generatePrompt(String diaryContent) {
+    public String fetchPrompt(String diaryContent) {
         return webClient.post()
-                .uri("/api/generate-prompt")
+                .uri("/flux-prompt/")
                 .bodyValue(Collections.singletonMap("content", diaryContent))
                 .retrieve()
                 .bodyToMono(String.class)
