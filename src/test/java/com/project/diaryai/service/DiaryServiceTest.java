@@ -10,5 +10,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class DiaryServiceTest {
     @Autowired
     private DiaryService diaryService;
-    
+
 }
