@@ -7,7 +7,7 @@ import lombok.Getter;
 @Builder
 public class PromptReqDto {
 
-    private String loraParameter; // lora 모델 파라미터
-    private String summarizedContent; // 요약된 일기 내용
+    private String lora_name; // lora 모델 파라미터
+    private String summarized_content; // 요약된 일기 내용
 
 }

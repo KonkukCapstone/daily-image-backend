@@ -15,8 +15,8 @@ public class PromptService {
     public PromptResDto generatePrompt(PromptReqDto promptReqDto) {
 
         // lora 파라미터, 요약된 일기 문장 추출
-        String loraParameter = promptReqDto.getLoraParameter();
-        String summarizedContent = promptReqDto.getSummarizedContent();
+        String loraParameter = promptReqDto.getLora_name();
+        String summarizedContent = promptReqDto.getSummarized_content();
 
         // gpt api 호출 후 프롬프트 생성
         String rawPrompt = gptApiClient.generatePrompt(summarizedContent);
