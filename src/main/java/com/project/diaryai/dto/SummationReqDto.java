@@ -7,5 +7,5 @@ import lombok.Getter;
 @Builder
 public class SummationReqDto {
     
-    private String diary_content; // 일기 내용
+    private String diary; // 일기 내용
 }
