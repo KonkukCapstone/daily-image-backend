@@ -55,7 +55,7 @@ public class PromptService {
         if ("rapunzel.safetensors".equals(loraParameter)) {
             return "RAPUNZEL, beautiful teenager rapunzel, girl, ";
         } else if ("3d.safetensors".equals(loraParameter)) {
-            return "";
+            return "beautiful, ";
         }
         return "";
     }
