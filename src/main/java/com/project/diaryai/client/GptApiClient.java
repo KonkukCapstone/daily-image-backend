@@ -3,6 +3,8 @@ package com.project.diaryai.client;
 import com.project.diaryai.dto.PromptReqDto;
 import com.project.diaryai.dto.SummationReqDto;
 import java.util.Collections;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -10,9 +12,11 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class GptApiClient {
     private final WebClient webClient;
 
-    // TODO : fastAPI 서버 주소로 변경하기
+    @Value("${fast.base-url}")
+    private String baseUrl;
+
     public GptApiClient(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.baseUrl("https://asia-northeast1-grouping-softable.cloudfunctions.net").build();
+        this.webClient = webClientBuilder.baseUrl(baseUrl).build();
     }
 
     // 일기 요약본 기반으로 프롬프트 생성
