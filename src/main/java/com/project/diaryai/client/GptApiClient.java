@@ -1,5 +1,6 @@
 package com.project.diaryai.client;
 
+import com.project.diaryai.dto.PromptReqDto;
 import com.project.diaryai.dto.SummationReqDto;
 import java.util.Collections;
 import org.springframework.stereotype.Component;
@@ -11,14 +12,17 @@ public class GptApiClient {
 
     // TODO : fastAPI 서버 주소로 변경하기
     public GptApiClient(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.baseUrl("http://localhost:8000/api").build();
+        this.webClient = webClientBuilder.baseUrl("https://asia-northeast1-grouping-softable.cloudfunctions.net").build();
     }
 
     // 일기 요약본 기반으로 프롬프트 생성
-    public String generatePrompt(String summarizedContent) {
+    public String generatePrompt(String summary) {
+        PromptReqDto request = PromptReqDto.builder()
+                .summary(summary)
+                .build();
         return webClient.post()
-                .uri("/flux-prompt/")
-                .bodyValue(Collections.singletonMap("content", summarizedContent))
+                .uri("/gpt-prompt")
+                .bodyValue(request)
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();
@@ -27,11 +31,11 @@ public class GptApiClient {
     // 키워드, 일기 요약본 생성
     public String generateDiaryHighlight(String diaryContent) {
         SummationReqDto request = SummationReqDto.builder()
-                .diary_content(diaryContent)
+                .diary(diaryContent)
                 .build();
 
         return webClient.post()
-                .uri("/diary-highlight/")
+                .uri("/gpt-kr-2")
                 .bodyValue(request)
                 .retrieve()
                 .bodyToMono(String.class)
